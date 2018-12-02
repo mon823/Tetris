@@ -291,7 +291,7 @@ public class Board extends JPanel implements ActionListener {
 				}
 
 				drawSquare(g, 0 + x * squareWidth(), boardTop + (BoardHeight - y - 1) * squareHeight(),
-						guidePiece.getShape());
+						guidePiece.getShape(),true);
 
 			}
 		}
@@ -586,13 +586,18 @@ public class Board extends JPanel implements ActionListener {
 
 	}
 
-	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
+	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape,boolean k) {
 		Color colors[] = { new Color(0, 0, 0), new Color(204, 102, 102), new Color(102, 204, 102),
 				new Color(102, 102, 204), new Color(204, 204, 102), new Color(204, 102, 204), new Color(102, 204, 204),
 				new Color(218, 170, 0), new Color(192, 192, 192) };
+		Color colorsguides[] = { new Color(0, 0, 0,122), new Color(204, 102, 102,122), new Color(102, 204, 102,122),
+				new Color(102, 102, 204,122), new Color(204, 204, 102,122), new Color(204, 102, 204,122), new Color(102, 204, 204,122),
+				new Color(218, 170, 0,122), new Color(192, 192, 192,122) };
 
 		Color color = colors[shape.ordinal()];
-
+		if (k==true) {
+			color = colorsguides[shape.ordinal()]; 
+		}
 		g.setColor(color);
 		g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
 
@@ -604,5 +609,8 @@ public class Board extends JPanel implements ActionListener {
 		g.drawLine(x + 1, y + squareHeight() - 1, x + squareWidth() - 1, y + squareHeight() - 1);
 		g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 
+	}
+	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
+		this.drawSquare(g, x, y, shape,false);
 	}
 }

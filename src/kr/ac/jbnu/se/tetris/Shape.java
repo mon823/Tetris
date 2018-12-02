@@ -23,7 +23,7 @@ public class Shape {
 		
 		int x = Math.abs(r.nextInt()) % 7 + 1;
 		Tetrominoes[] values = Tetrominoes.values();
-		setShape(values[3]);
+		setShape(values[x]);
 	}
 	
 	public void setShape(Tetrominoes shape) {
