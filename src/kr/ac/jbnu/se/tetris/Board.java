@@ -61,15 +61,28 @@ public class Board extends JPanel implements ActionListener {
 
 	private Queue<Shape> queue = new LinkedList<Shape>();
 
+	private Color colors[] = { new Color(0, 0, 0), new Color(204, 102, 102), new Color(102, 204, 102),
+			new Color(102, 102, 204), new Color(204, 204, 102), new Color(204, 102, 204), new Color(102, 204, 204),
+			new Color(218, 170, 0), new Color(192, 192, 192) };
+	
+	private Color colorsguides[] = { new Color(0, 0, 0, 122), new Color(204, 102, 102, 122),
+			new Color(102, 204, 102, 122), new Color(102, 102, 204, 122), new Color(204, 204, 102, 122),
+			new Color(204, 102, 204, 122), new Color(102, 204, 204, 122), new Color(218, 170, 0, 122),
+			new Color(192, 192, 192, 122) };
+
 	public Board() {
+		
 	}
 
 	public Board(Tetris tetris, int x) {
 		is2Player = x;
 		curPiece = new Shape();
 		guidePiece = new Shape();
-		timer = new Timer(400, this); // why this?
-		timer.start(); // ??
+		
+		
+		timer = new Timer(400, this);// 타이머
+		timer.start();
+
 		if (is2Player == 0) {
 			statusbar = tetris.getStatusBar();
 		} else if (is2Player == 1) {
@@ -88,31 +101,8 @@ public class Board extends JPanel implements ActionListener {
 	}
 
 	public Board(Tetris tetris, int x, Board board) {
-		is2Player = x;
-		curPiece = new Shape();
+		this(tetris,x);
 		enemy = board;
-		guidePiece = new Shape();
-
-		timer = new Timer(400, this);// 타이머
-		timer.start();
-
-		if (is2Player == 0) {
-			statusbar = tetris.getStatusBar();
-		} else if (is2Player == 1) {
-			statusbar1 = tetris.getStatus1Bar();
-		} else {
-			statusbar2 = tetris.getStatus2Bar();
-		}
-		this.board = new Tetrominoes[BoardWidth * BoardHeight];
-
-		this.tetris = tetris;
-
-		for (int i = 0; i < 5; i++) {
-			queue.offer(new Shape(1));
-		}
-
-		this.setFocusable(true);
-		clearBoard();
 	}
 
 	public void getBoard(Board board) {
@@ -289,7 +279,7 @@ public class Board extends JPanel implements ActionListener {
 				}
 
 				drawSquare(g, 0 + x * squareWidth(), boardTop + (BoardHeight - y - 1) * squareHeight(),
-						guidePiece.getShape(),true);
+						guidePiece.getShape(), true);
 
 			}
 		}
@@ -310,7 +300,7 @@ public class Board extends JPanel implements ActionListener {
 	public void guideDown() {
 		int newY = curY;
 		while (newY > 0) {
-			if (!guideMove(guidePiece, curX, newY - 1)) {
+			if (!tryMove(guidePiece, curX, newY - 1,true)) {
 				break;
 			}
 			--newY;
@@ -415,8 +405,8 @@ public class Board extends JPanel implements ActionListener {
 		}
 	}
 
-	public boolean tryMove(Shape newPiece, int newX, int newY) { // true false 값을 비교하기도 하지만 현 상태도
-																	// 움직임//guideShape를 인수로 추가하면 어떨까
+	public boolean tryMove(Shape newPiece, int newX, int newY, boolean k) { // true false 값을 비교하기도 하지만 현 상태도
+		// 움직임//guideShape를 인수로 추가하면 어떨까
 		for (int i = 0; i < 4; ++i) { // 각각 4개의 상태가 같이 움직이기 위함
 			int x = newX + newPiece.x(i); // 움직인 방향으로 X축 이동
 			int y = newY - newPiece.y(i); // 움직인 방향으로 Y축 이동
@@ -428,30 +418,40 @@ public class Board extends JPanel implements ActionListener {
 				return false;
 		}
 
-		curPiece = newPiece; // 새로운 도형이 이 현 도형으로
-		curX = newX; // 새로운 X값이 현 X값으로
-		curY = newY; // 새로운 Y값이 현 Y값으로
-		guideDown();
-		repaint(); // paint()를 다시 실행
-
-		return true; // false를 반환하지 않을 경우에 true 반환
-	}
-
-	public boolean guideMove(Shape newPiece, int newX, int newY) { // true false 값을 비교하기도 하지만 현 상태도 움직임
-		for (int i = 0; i < 4; ++i) { // 각각 4개의 상태가 같이 움직이기 위함
-			int x = newX + newPiece.x(i); // 움직인 방향으로 X축 이동
-			int y = newY - newPiece.y(i); // 움직인 방향으로 Y축 이동
-			if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) // 움직일수 없는 방향일 경우 false 반환
-				return false;
-			if (shapeAt(x, y) != Tetrominoes.NoShape) // 확인한 공간이 NoShape이 아닐 경우 false 반환
-				return false;
+		if (k == true) {
+			guidePiece = newPiece; // 새로운 도형이 이 현 도형으로
+			guideX = newX; // 새로운 X값이 현 X값으로
+			guideY = newY; // 새로운 Y값이 현 Y값으로
+			repaint(); // paint()를 다시 실행
+		} else {
+			curPiece = newPiece; // 새로운 도형이 이 현 도형으로
+			curX = newX; // 새로운 X값이 현 X값으로
+			curY = newY; // 새로운 Y값이 현 Y값으로
+			guideDown();
+			repaint(); // paint()를 다시 실행
 		}
-		guidePiece = newPiece; // 새로운 도형이 이 현 도형으로
-		guideX = newX; // 새로운 X값이 현 X값으로
-		guideY = newY; // 새로운 Y값이 현 Y값으로
-		repaint(); // paint()를 다시 실행
 		return true; // false를 반환하지 않을 경우에 true 반환
 	}
+	public boolean tryMove(Shape newPiece, int newX, int newY) {
+		return this.tryMove(newPiece, newX, newY, false);
+	}
+	// public boolean guideMove(Shape newPiece, int newX, int newY) { // true false
+	// 값을 비교하기도 하지만 현 상태도 움직임
+	// for (int i = 0; i < 4; ++i) { // 각각 4개의 상태가 같이 움직이기 위함
+	// int x = newX + newPiece.x(i); // 움직인 방향으로 X축 이동
+	// int y = newY - newPiece.y(i); // 움직인 방향으로 Y축 이동
+	// if (x < 0 || x >= BoardWidth || y < 0 || y >= BoardHeight) // 움직일수 없는 방향일 경우
+	// false 반환
+	// return false;
+	// if (shapeAt(x, y) != Tetrominoes.NoShape) // 확인한 공간이 NoShape이 아닐 경우 false 반환
+	// return false;
+	// }
+	// guidePiece = newPiece; // 새로운 도형이 이 현 도형으로
+	// guideX = newX; // 새로운 X값이 현 X값으로
+	// guideY = newY; // 새로운 Y값이 현 Y값으로
+	// repaint(); // paint()를 다시 실행
+	// return true; // false를 반환하지 않을 경우에 true 반환
+	// }
 
 	private void findTop() {
 		for (int i = BoardHeight - 1; i >= 0; --i) {
@@ -516,44 +516,48 @@ public class Board extends JPanel implements ActionListener {
 		}
 
 		if (numFullLines > 0) { // 만약 한칸이라도 지워졌다면
-			numLinesRemoved += numFullLines * 1000; // 지운 갯수에 +
-			sendScore();
-
-			if (is2Player != 0) {
-				attackOpponent(numFullLines);
-			}
-
-			if (numLinesRemoved / reverseLevel >= 1 && Configuration.isReverse == false) {// 뒤집기
-				reverseLevel += 20000;
-				if (!isReverse)
-					isReverse = true;
-				else
-					isReverse = false;
-			}
-
-			if (numLinesRemoved / 2000 > level) {
-				level = numLinesRemoved / 2000;
-				sendLevel();
-				if (400 - level * 5 != 0) {
-					timer.setDelay(400 - level * 5);
-				}
-
-			}
-			if (numLinesRemoved / upBlockLevel >= 1) {
-				upBlockLevel += 10000;
-				if (upBlockLevel > 50000) {
-					createNewLines();
-				}
-				createNewLines();
-			}
-
-			soundEffect.Play("sound/test_1.wav");
-			soundEffectSetting();
-			isFallingFinished = true; // 다 떨어진 상태 True (why?)
-			curPiece.setShape(Tetrominoes.NoShape); // 현 상태 NoShape ?
-			repaint();
+			afterRemove(numFullLines);
 		}
 
+	}
+
+	private void afterRemove(int numFullLines) {
+		numLinesRemoved += numFullLines * 1000; // 지운 갯수에 +
+		sendScore();
+
+		if (is2Player != 0) {
+			attackOpponent(numFullLines);
+		}
+
+		if (numLinesRemoved / reverseLevel >= 1 && Configuration.isReverse == false) {// 뒤집기
+			reverseLevel += 20000;
+			if (!isReverse)
+				isReverse = true;
+			else
+				isReverse = false;
+		}
+
+		if (numLinesRemoved / 2000 > level) {
+			level = numLinesRemoved / 2000;
+			sendLevel();
+			if (400 - level * 5 != 0) {
+				timer.setDelay(400 - level * 5);
+			}
+
+		}
+		if (numLinesRemoved / upBlockLevel >= 1) {
+			upBlockLevel += 10000;
+			if (upBlockLevel > 50000) {
+				createNewLines();
+			}
+			createNewLines();
+		}
+
+		soundEffect.Play("sound/test_1.wav");
+		soundEffectSetting();
+		isFallingFinished = true; // 다 떨어진 상태 True (why?)
+		curPiece.setShape(Tetrominoes.NoShape); // 현 상태 NoShape ?
+		repaint();
 	}
 
 	private void soundEffectSetting() {
@@ -596,17 +600,11 @@ public class Board extends JPanel implements ActionListener {
 		}
 	}
 
-	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape,boolean k) {
-		Color colors[] = { new Color(0, 0, 0), new Color(204, 102, 102), new Color(102, 204, 102),
-				new Color(102, 102, 204), new Color(204, 204, 102), new Color(204, 102, 204), new Color(102, 204, 204),
-				new Color(218, 170, 0), new Color(192, 192, 192) };
-		Color colorsguides[] = { new Color(0, 0, 0,122), new Color(204, 102, 102,122), new Color(102, 204, 102,122),
-				new Color(102, 102, 204,122), new Color(204, 204, 102,122), new Color(204, 102, 204,122), new Color(102, 204, 204,122),
-				new Color(218, 170, 0,122), new Color(192, 192, 192,122) };
+	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape, boolean k) {
 
 		Color color = colors[shape.ordinal()];
-		if (k==true) {
-			color = colorsguides[shape.ordinal()]; 
+		if (k == true) {
+			color = colorsguides[shape.ordinal()];
 		}
 		g.setColor(color);
 		g.fillRect(x + 1, y + 1, squareWidth() - 2, squareHeight() - 2);
@@ -620,7 +618,8 @@ public class Board extends JPanel implements ActionListener {
 		g.drawLine(x + squareWidth() - 1, y + squareHeight() - 1, x + squareWidth() - 1, y + 1);
 
 	}
+
 	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape) {
-		this.drawSquare(g, x, y, shape,false);
+		this.drawSquare(g, x, y, shape, false);
 	}
 }

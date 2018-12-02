@@ -68,13 +68,13 @@ class Key extends SettingKey implements KeyListener {
 		}
 		if (keycode == downKey) {
 			board.tryMove(board.curPiece.rotateRight(), board.curX, board.curY);
-			board.guideMove(board.guidePiece.rotateRight(), board.curX, board.curY);
+			board.tryMove(board.guidePiece.rotateRight(), board.curX, board.curY,true);
 			board.guideDown();
 		}
 
 		if (keycode == upKey) {
 			board.tryMove(board.curPiece.rotateLeft(), board.curX, board.curY);
-			board.guideMove(board.guidePiece.rotateLeft(), board.curX, board.curY);
+			board.tryMove(board.guidePiece.rotateLeft(), board.curX, board.curY,true);
 			board.guideDown();
 		}
 		if (keycode == lineDownKey) {
@@ -102,13 +102,13 @@ class Key extends SettingKey implements KeyListener {
 
 		if (keycode == downKeyTwo) {
 			board2.tryMove(board2.curPiece.rotateRight(), board2.curX, board2.curY);
-			board2.guideMove(board2.guidePiece.rotateRight(), board2.curX, board2.curY);
+			board2.tryMove(board2.guidePiece.rotateRight(), board2.curX, board2.curY,true);
 			board2.guideDown();
 		}
 
 		if (keycode == upKeyTwo) {
 			board2.tryMove(board2.curPiece.rotateLeft(), board2.curX, board2.curY);
-			board2.guideMove(board2.guidePiece.rotateLeft(), board2.curX, board2.curY);
+			board2.tryMove(board2.guidePiece.rotateLeft(), board2.curX, board2.curY,true);
 			board2.guideDown();
 		}
 
