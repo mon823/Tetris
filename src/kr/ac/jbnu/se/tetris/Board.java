@@ -23,18 +23,17 @@ public class Board extends JPanel implements ActionListener {
 	final private int BoardHeight = 22; // 세로 10칸
 
 	// 배경음악 효과음
-	Sound backgroundMusic = new Sound(true);
-	Sound soundEffect = new Sound(false);
+	public Sound backgroundMusic = new Sound(true);
+	private Sound soundEffect = new Sound(false);
 
 	// 기록
-	Record record = new Record();
+	private Record record = new Record();
 
-	Timer timer;
-	boolean isFallingFinished = false;
-	boolean isStarted = false;
-	boolean isPaused = false;
-	boolean isReverse = false;
-	boolean isconfigReverse = false;
+	public Timer timer;
+	private boolean isFallingFinished = false;
+	public boolean isStarted = false;
+	public boolean isPaused = false;
+	private boolean isReverse = false;
 	private int is2Player;
 
 	private int upBlockLevel = 10000;
@@ -47,21 +46,20 @@ public class Board extends JPanel implements ActionListener {
 	public int curY = 0;
 	public int guideX = 0;
 	public int guideY = 0;
-	JLabel statusbar;
-	JLabel statusbar1;
-	JLabel statusbar2;
+	private JLabel statusbar;
+	private JLabel statusbar1;
+	private JLabel statusbar2;
 
-	Board enemy;
+	private Board enemy;
 	private int stack;
 
-	Shape nextPiece;
-	Shape curPiece;
-	Shape guidePiece;
-	Tetrominoes[] board;
-	Tetrominoes[] cpBoard = new Tetrominoes[BoardWidth * BoardHeight];
-	Tetris tetris;
+	public Shape curPiece;
+	public Shape guidePiece;
+	private Tetrominoes[] board;
+	private Tetrominoes[] cpBoard = new Tetrominoes[BoardWidth * BoardHeight];
+	private Tetris tetris;
 
-	Queue<Shape> queue = new LinkedList<Shape>();
+	private Queue<Shape> queue = new LinkedList<Shape>();
 
 	public Board() {
 	}

@@ -10,16 +10,15 @@ import javax.swing.SwingConstants;
 
 public class Tetris extends JFrame {
 
-	JLabel statusbar;
-	JLabel statusbar1;
-	JLabel statusbar2;
-	JPanel score = new JPanel();
-	JLabel level;
-	JPanel gamePanel = new JPanel();
-	Board board;
-	Board board2;
-	StateMain statemain;
-	StateMenu statemenu;
+	private JLabel statusbar;
+	private JLabel statusbar1;
+	private JLabel statusbar2;
+	private JPanel score = new JPanel();
+	private JPanel gamePanel = new JPanel();
+	private Board board;
+	private Board board2;
+	public StateMain statemain;
+	public StateMenu statemenu;
 
 	// 1ÀÎ¿ë
 	public Tetris() {

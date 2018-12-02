@@ -62,12 +62,12 @@ public class StateMain extends JPanel {
 		setLocation((screenSize.width - frameSize.width) / 2 + 185, (screenSize.height - frameSize.height) / 2 - 14);
 	}
 
-	int squareWidth() {
+	private int squareWidth() {
 		return (int) getSize().getWidth() / BoardWidth;
 
 	}
 
-	int squareHeight() {
+	private int squareHeight() {
 		return (int) getSize().getHeight() / BoardHeight;
 	}
 

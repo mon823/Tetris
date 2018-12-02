@@ -13,11 +13,11 @@ public class Sound {
 	private Clip clip;
 	private boolean loop;
 
-	FloatControl gainControl;
-	AudioInputStream ais;
-	AudioFormat format;
-	DataLine.Info info;
-	float range;
+	private FloatControl gainControl;
+	private AudioInputStream ais;
+	private AudioFormat format;
+	private DataLine.Info info;
+	private float range;
 
 	public Sound(boolean loop) {
 		this.loop = loop;
