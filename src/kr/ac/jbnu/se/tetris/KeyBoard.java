@@ -11,7 +11,6 @@ class Key extends SettingKey implements KeyListener {
 	private boolean playFlag = false;
 
 	public Key(Board board) {
-
 		this.board = board;
 		board2 = new Board();
 	}

@@ -43,42 +43,46 @@ public class SettingKey implements KeyListener {
 		if (isTwo == false)
 			play1Key(keyCode);
 		else {
-			switch (key) {
-
-			case "upKey":
-				upKeyTwo = keyCode;
-				break;
-
-			case "lineDown":
-				lineDownKeyTwo = keyCode;
-				break;
-
-			case "downKey":
-				downKeyTwo = keyCode;
-				break;
-
-			case "leftKey":
-				leftKeyTwo = keyCode;
-				break;
-
-			case "rightKey":
-				rightKeyTwo = keyCode;
-				break;
-
-			case "pauseKey":
-				pauseKey = keyCode;
-				break;
-				
-			case "oneDownKey":
-				System.out.println("한줄다운");
-				oneLineDownKeyTwo = keyCode;
-
-			default:
-				break;
-
-			}
+			play2Key(keyCode);
 		}
 
+	}
+
+	private void play2Key(int keyCode) {
+		switch (key) {
+
+		case "upKey":
+			upKeyTwo = keyCode;
+			break;
+
+		case "lineDown":
+			lineDownKeyTwo = keyCode;
+			break;
+
+		case "downKey":
+			downKeyTwo = keyCode;
+			break;
+
+		case "leftKey":
+			leftKeyTwo = keyCode;
+			break;
+
+		case "rightKey":
+			rightKeyTwo = keyCode;
+			break;
+
+		case "pauseKey":
+			pauseKey = keyCode;
+			break;
+			
+		case "oneDownKey":
+			System.out.println("한줄다운");
+			oneLineDownKeyTwo = keyCode;
+
+		default:
+			break;
+
+		}
 	}
 
 	private void play1Key(int keyCode) {
