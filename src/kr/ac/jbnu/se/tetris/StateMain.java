@@ -21,8 +21,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class StateMain extends JPanel {
 
-	final int BoardWidth = 13; // °¡·Î 10Ä­
-	final int BoardHeight = 18; // ¼¼·Î 10Ä­
+	private final int BoardWidth = 13; // °¡·Î 10Ä­
+	private final int BoardHeight = 18; // ¼¼·Î 10Ä­
 
 	private HashMap<Integer, String> rankList = new HashMap<Integer, String>();
 	private ArrayList<String> userList = new ArrayList<String>();

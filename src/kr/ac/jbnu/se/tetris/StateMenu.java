@@ -14,10 +14,10 @@ import javax.swing.border.LineBorder;
 
 public class StateMenu extends JPanel {
 	
-	final int BoardWidth = 13; // °¡·Î 10Ä­
-	final int BoardHeight = 18; // ¼¼·Î 10Ä­
+	private final int BoardWidth = 13; // °¡·Î 10Ä­
+	private final int BoardHeight = 18; // ¼¼·Î 10Ä­
 	
-	public JPanel scoreBoard = new JPanel();;
+	private JPanel scoreBoard = new JPanel();;
 	private JPanel sateBoard = new JPanel();
 	private JPanel player1nextShapeSmall1 = new JPanel();
 	private JPanel player1nextShapeSmall2 = new JPanel();
@@ -109,12 +109,12 @@ public class StateMenu extends JPanel {
 	}
 
 	
-	int squareWidth() {
+	private int squareWidth() {
 		return (int) getSize().getWidth() / BoardWidth;
 
 	}
 
-	int squareHeight() {
+	private int squareHeight() {
 		return (int) getSize().getHeight() / BoardHeight;
 	}
 	

@@ -278,12 +278,4 @@ public class Configuration extends JFrame {
 
 	}
 
-	public float getBackVoulme() {
-		return backSoundVoulme;
-	}
-
-	public float geteffectVoulme() {
-		return effectSoundVolume;
-	}
-
 }

@@ -57,21 +57,6 @@ public class Shape {
 		return pieceShape;
 	}
 
-	public void setRandomShape() {
-		Random r = new Random();
-		int x = Math.abs(r.nextInt()) % 7 + 1;			// 8가지 중 1 선택
-		Tetrominoes[] values = Tetrominoes.values();
-		setShape(values[x]);
-	}
-
-	public int minX() {
-		int m = coords[0][0];
-		for (int i = 0; i < 4; i++) {
-			m = Math.min(m, coords[i][0]);
-		}
-		return m;
-	}
-
 	public int minY() {
 		int m = coords[0][1];
 		for (int i = 0; i < 4; i++) {
