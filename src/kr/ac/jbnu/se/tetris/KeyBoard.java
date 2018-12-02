@@ -33,7 +33,7 @@ class Key extends SettingKey implements KeyListener {
 
 		int keycode = e.getKeyCode();
 
-		if (keycode == 'p' || keycode == 'P') {
+		if (keycode == pauseKey || keycode == pauseKey+30) {//대문자와 소문자의 차이는 아스키 코드로 30!
 			board.pause();
 			board2.pause();
 
@@ -68,19 +68,19 @@ class Key extends SettingKey implements KeyListener {
 				board2.dropDown();
 			}
 
-			if (keycode == startKeyTwo) {
+			if (keycode == KeyEvent.VK_0) {
 				board2.start();
 				board2.backgroundMusic.Stop();
 				board2.timer.start();
 			}
 
-			if (keycode == 'q') {
+			if (keycode == oneLineDownKeyTwo||keycode == oneLineDownKeyTwo+32) {
 				board2.oneLineDown();
 			}
 
-			if (keycode == 'Q') {
-				board2.oneLineDown();
-			}
+//			if (keycode == 'Q') {
+//				board2.oneLineDown();
+//			}//<- 이부분 어떻게 하기
 
 			if (keycode == leftKey) {
 				board.tryMove(board.curPiece, board.curX - 1, board.curY);
@@ -111,12 +111,12 @@ class Key extends SettingKey implements KeyListener {
 				board.timer.start();
 			}
 
-			if (keycode == 'm') {
+			if (keycode == oneLineDownKey||keycode == oneLineDownKey+32) {
 				board.oneLineDown();
 			}
-			if (keycode == 'M') {
-				board.oneLineDown();
-			}
+//			if (keycode == 'M') {
+//				board.oneLineDown();
+//			}
 
 		}
 
@@ -152,12 +152,12 @@ class Key extends SettingKey implements KeyListener {
 				board.timer.start();
 			}
 
-			if (keycode == oneLineDownKey) {
+			if (keycode == oneLineDownKey||keycode == oneLineDownKey+32) {
 				board.oneLineDown();
 			}
-			if (keycode == 'M') {// 고치기0
-				board.oneLineDown();
-			}
+//			if (keycode == 'M') {// <- 이부분 어떻게 하기
+//				board.oneLineDown();
+//			}
 		}
 	}
 

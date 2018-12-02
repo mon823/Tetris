@@ -14,14 +14,14 @@ public class Tetris extends JFrame {
 	JLabel statusbar1;
 	JLabel statusbar2;
 	JPanel score = new JPanel();
-	JLabel level ;
+	JLabel level;
 	JPanel gamePanel = new JPanel();
 	Board board;
 	Board board2;
 	StateMain statemain;
 	StateMenu statemenu;
-	
-	//1인용
+
+	// 1인용
 	public Tetris() {
 		this.setLayout(new BorderLayout());
 		gamePanel.setLayout(new GridLayout(1, 2));
@@ -29,7 +29,7 @@ public class Tetris extends JFrame {
 		add(statusbar, BorderLayout.SOUTH);
 		add(gamePanel);
 		statemain = new StateMain(this);
-		board = new Board(this,0);
+		board = new Board(this, 0);
 		board.addKeyListener(new Key(board));
 		board.setFocusable(true);
 		gamePanel.add(board);
@@ -41,11 +41,12 @@ public class Tetris extends JFrame {
 		statemain.setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	//2인용
+
+	// 2인용
 	public Tetris(int x) {
 		this.setLayout(new BorderLayout());
 		gamePanel.setLayout(new GridLayout(1, 2));
-		score.setLayout(new GridLayout(1,2));
+		score.setLayout(new GridLayout(1, 2));
 		statusbar1 = new JLabel("0");
 		statusbar2 = new JLabel("0");
 		statusbar2.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -54,10 +55,10 @@ public class Tetris extends JFrame {
 		score.add(statusbar2);
 		add(gamePanel);
 		statemenu = new StateMenu(this);
-		board = new Board(this,1);
-		board2 = new Board(this,2,board);
+		board = new Board(this, 1);
+		board2 = new Board(this, 2, board);
 		board.getBoard(board2);
-		board.addKeyListener(new Key(board,board2));
+		board.addKeyListener(new Key(board, board2));
 		board.setFocusable(true);
 		gamePanel.add(board);
 		gamePanel.add(statemenu);
@@ -74,12 +75,13 @@ public class Tetris extends JFrame {
 	public JLabel getStatusBar() {
 		return statusbar;
 	}
+
 	public JLabel getStatus1Bar() {
 		return statusbar1;
 	}
+
 	public JLabel getStatus2Bar() {
 		return statusbar2;
 	}
-	
-}
 
+}

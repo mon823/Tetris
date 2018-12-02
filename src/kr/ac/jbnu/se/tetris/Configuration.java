@@ -76,6 +76,20 @@ public class Configuration extends JFrame {
 		down.setBounds(59, 219, 205, 33);
 		setKey.add(down);
 
+		setKey.add(down);
+
+		JButton oneDown = new JButton("한 줄 씩 다운");
+		oneDown.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				caution.setVisible(true);
+				oneDown.addKeyListener(new SettingKey("oneDownKey"));
+				oneDown.requestFocus();
+
+			}
+		});
+		oneDown.setBounds(59, 157, 205, 36);
+		setKey.add(oneDown);
+
 		JButton rotate = new JButton("아래");
 		rotate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -122,9 +136,10 @@ public class Configuration extends JFrame {
 
 			}
 		});
-		start.setBounds(14, 106, 68, 39);
+		start.setBounds(59, 106, 68, 39);
 		setKey.add(start);
 
+		// 1인 키보드설정
 		JButton onePerson = new JButton("1인");
 		onePerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +149,8 @@ public class Configuration extends JFrame {
 		});
 		onePerson.setBounds(14, 12, 217, 27);
 		setKey.add(onePerson);
-
+		
+		// 2인 키보드설정
 		JButton twoPerson = new JButton("2인");
 		twoPerson.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -13,17 +13,15 @@ public class SettingKey implements KeyListener {
 	static protected int leftKey = KeyEvent.VK_LEFT;
 	static protected int rightKey = KeyEvent.VK_RIGHT;
 	static protected int lineDownKey = KeyEvent.VK_SPACE;
-	static protected int oneLineDownKey = 'm';
-	static protected int startKey = KeyEvent.VK_9;// 초기값
-	
+	static protected int oneLineDownKey = KeyEvent.VK_M;
+
 	// 2p
 	static protected int upKeyTwo = KeyEvent.VK_W;
 	static protected int downKeyTwo = KeyEvent.VK_S;
 	static protected int leftKeyTwo = KeyEvent.VK_A;
 	static protected int rightKeyTwo = KeyEvent.VK_D;
 	static protected int lineDownKeyTwo = KeyEvent.VK_SHIFT;
-	static protected int oneLineDownKeyTwo = 'q';
-	static protected int startKeyTwo = KeyEvent.VK_0;
+	static protected int oneLineDownKeyTwo = KeyEvent.VK_Q;
 
 	protected String key;
 	protected static boolean isTwo = false;
@@ -76,6 +74,11 @@ public class SettingKey implements KeyListener {
 				pauseKey = keyCode;
 				break;
 
+			case "oneDownKey":
+				System.out.println("한줄다운");
+				oneLineDownKey = keyCode;
+				System.out.println(keyCode);
+
 			default:
 				break;
 
@@ -107,6 +110,10 @@ public class SettingKey implements KeyListener {
 			case "pauseKey":
 				pauseKey = keyCode;
 				break;
+				
+			case "oneDownKey":
+				System.out.println("한줄다운");
+				oneLineDownKeyTwo = keyCode;
 
 			default:
 				break;
