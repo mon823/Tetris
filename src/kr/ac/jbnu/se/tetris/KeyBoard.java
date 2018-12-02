@@ -45,119 +45,85 @@ class Key extends SettingKey implements KeyListener {
 
 		if (playFlag == true) {
 
-			if (keycode == leftKeyTwo) {
-				board2.tryMove(board2.curPiece, board2.curX - 1, board2.curY);
-			}
-			if (keycode == rightKeyTwo) {
-				board2.tryMove(board2.curPiece, board2.curX + 1, board2.curY);
-			}
-
-			if (keycode == downKeyTwo) {
-				board2.tryMove(board2.curPiece.rotateRight(), board2.curX, board2.curY);
-				board2.guideMove(board2.guidePiece.rotateRight(), board2.curX, board2.curY);
-				board2.guideDown();
-			}
-
-			if (keycode == upKeyTwo) {
-				board2.tryMove(board2.curPiece.rotateLeft(), board2.curX, board2.curY);
-				board2.guideMove(board2.guidePiece.rotateLeft(), board2.curX, board2.curY);
-				board2.guideDown();
-			}
-
-			if (keycode == lineDownKeyTwo) {
-				board2.dropDown();
-			}
-
-			if (keycode == KeyEvent.VK_0) {
-				board2.start();
-				board2.backgroundMusic.Stop();
-				board2.timer.start();
-			}
-
-			if (keycode == oneLineDownKeyTwo||keycode == oneLineDownKeyTwo+32) {
-				board2.oneLineDown();
-			}
-
-//			if (keycode == 'Q') {
-//				board2.oneLineDown();
-//			}//<- 이부분 어떻게 하기
-
-			if (keycode == leftKey) {
-				board.tryMove(board.curPiece, board.curX - 1, board.curY);
-
-			}
-
-			if (keycode == rightKey) {
-				board.tryMove(board.curPiece, board.curX + 1, board.curY);
-			}
-			if (keycode == downKey) {
-				board.tryMove(board.curPiece.rotateRight(), board.curX, board.curY);
-				board.guideMove(board.guidePiece.rotateRight(), board.curX, board.curY);
-				board.guideDown();
-			}
-
-			if (keycode == upKey) {
-				board.tryMove(board.curPiece.rotateLeft(), board.curX, board.curY);
-				board.guideMove(board.guidePiece.rotateLeft(), board.curX, board.curY);
-				board.guideDown();
-			}
-			if (keycode == lineDownKey) {
-				board.dropDown();
-			}
-
-			if (keycode == KeyEvent.VK_9) {
-				board.start();
-				board.backgroundMusic.Stop();
-				board.timer.start();
-			}
-
-			if (keycode == oneLineDownKey||keycode == oneLineDownKey+32) {
-				board.oneLineDown();
-			}
-//			if (keycode == 'M') {
-//				board.oneLineDown();
-//			}
+			play2KeyCode(keycode);
+			play1KeyCode(keycode);
 
 		}
 
 		else {
 
-			if (keycode == leftKey) {
-				board.tryMove(board.curPiece, board.curX - 1, board.curY);
+			play1KeyCode(keycode);
 
-			}
-			if (keycode == rightKey) {
-				board.tryMove(board.curPiece, board.curX + 1, board.curY);
+		}
+	}
 
-			}
-			if (keycode == downKey) {
-				board.tryMove(board.curPiece.rotateRight(), board.curX, board.curY);
-				board.guideMove(board.guidePiece.rotateRight(), board.curX, board.curY);
-				board.guideDown();
-			}
+	private void play1KeyCode(int keycode) {
+		if (keycode == leftKey) {
+			board.tryMove(board.curPiece, board.curX - 1, board.curY);
 
-			if (keycode == upKey) {
-				board.tryMove(board.curPiece.rotateLeft(), board.curX, board.curY);
-				board.guideMove(board.guidePiece.rotateLeft(), board.curX, board.curY);
-				board.guideDown();
-			}
+		}
 
-			if (keycode == lineDownKey) {
-				board.dropDown();
-			}
+		if (keycode == rightKey) {
+			board.tryMove(board.curPiece, board.curX + 1, board.curY);
+		}
+		if (keycode == downKey) {
+			board.tryMove(board.curPiece.rotateRight(), board.curX, board.curY);
+			board.guideMove(board.guidePiece.rotateRight(), board.curX, board.curY);
+			board.guideDown();
+		}
 
-			if (keycode == KeyEvent.VK_0) {
-				board.start();
-				board.backgroundMusic.Stop();
-				board.timer.start();
-			}
+		if (keycode == upKey) {
+			board.tryMove(board.curPiece.rotateLeft(), board.curX, board.curY);
+			board.guideMove(board.guidePiece.rotateLeft(), board.curX, board.curY);
+			board.guideDown();
+		}
+		if (keycode == lineDownKey) {
+			board.dropDown();
+		}
 
-			if (keycode == oneLineDownKey||keycode == oneLineDownKey+32) {
-				board.oneLineDown();
-			}
-//			if (keycode == 'M') {// <- 이부분 어떻게 하기
-//				board.oneLineDown();
-//			}
+		if (keycode == KeyEvent.VK_9) {
+			board.start();
+			board.backgroundMusic.Stop();
+			board.timer.start();
+		}
+
+		if (keycode == oneLineDownKey||keycode == oneLineDownKey+32) {
+			board.oneLineDown();
+		}
+	}
+
+	private void play2KeyCode(int keycode) {
+		if (keycode == leftKeyTwo) {
+			board2.tryMove(board2.curPiece, board2.curX - 1, board2.curY);
+		}
+		if (keycode == rightKeyTwo) {
+			board2.tryMove(board2.curPiece, board2.curX + 1, board2.curY);
+		}
+
+		if (keycode == downKeyTwo) {
+			board2.tryMove(board2.curPiece.rotateRight(), board2.curX, board2.curY);
+			board2.guideMove(board2.guidePiece.rotateRight(), board2.curX, board2.curY);
+			board2.guideDown();
+		}
+
+		if (keycode == upKeyTwo) {
+			board2.tryMove(board2.curPiece.rotateLeft(), board2.curX, board2.curY);
+			board2.guideMove(board2.guidePiece.rotateLeft(), board2.curX, board2.curY);
+			board2.guideDown();
+		}
+
+		if (keycode == lineDownKeyTwo) {
+			board2.dropDown();
+		}
+
+		if (keycode == KeyEvent.VK_0) {
+			board2.start();
+			board2.backgroundMusic.Stop();
+			board2.timer.start();
+		}
+
+		if (keycode == oneLineDownKeyTwo||keycode == oneLineDownKeyTwo+32) {
+			board2.oneLineDown();
 		}
 	}
 

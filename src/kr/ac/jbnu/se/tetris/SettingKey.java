@@ -41,86 +41,92 @@ public class SettingKey implements KeyListener {
 		int keyCode = e.getKeyCode();// 키코드 번호 받아오는 거
 
 		if (isTwo == false)
-
-			switch (key) {
-
-			case "upKey": // 스트링을 통해 key를 받아올 것
-				System.out.println("업키");
-				upKey = keyCode;
-				break;
-
-			case "lineDownKey":
-				System.out.println("라인다운");
-				lineDownKey = keyCode;
-				break;
-
-			case "downKey":
-				System.out.println("다운");
-				downKey = keyCode;
-				break;
-
-			case "leftKey":
-				System.out.println("왼쪽");
-				leftKey = keyCode;
-				break;
-
-			case "rightKey":
-				System.out.println("오른쪽");
-				rightKey = keyCode;
-				break;
-
-			case "pauseKey":
-				System.out.println("멈춤");
-				pauseKey = keyCode;
-				break;
-
-			case "oneDownKey":
-				System.out.println("한줄다운");
-				oneLineDownKey = keyCode;
-				System.out.println(keyCode);
-
-			default:
-				break;
-
-			}
-
+			play1Key(keyCode);
 		else {
-			switch (key) {
-
-			case "upKey":
-				upKeyTwo = keyCode;
-				break;
-
-			case "lineDown":
-				lineDownKeyTwo = keyCode;
-				break;
-
-			case "downKey":
-				downKeyTwo = keyCode;
-				break;
-
-			case "leftKey":
-				leftKeyTwo = keyCode;
-				break;
-
-			case "rightKey":
-				rightKeyTwo = keyCode;
-				break;
-
-			case "pauseKey":
-				pauseKey = keyCode;
-				break;
-				
-			case "oneDownKey":
-				System.out.println("한줄다운");
-				oneLineDownKeyTwo = keyCode;
-
-			default:
-				break;
-
-			}
+			play2Key(keyCode);
 		}
 
+	}
+
+	private void play2Key(int keyCode) {
+		switch (key) {
+
+		case "upKey":
+			upKeyTwo = keyCode;
+			break;
+
+		case "lineDown":
+			lineDownKeyTwo = keyCode;
+			break;
+
+		case "downKey":
+			downKeyTwo = keyCode;
+			break;
+
+		case "leftKey":
+			leftKeyTwo = keyCode;
+			break;
+
+		case "rightKey":
+			rightKeyTwo = keyCode;
+			break;
+
+		case "pauseKey":
+			pauseKey = keyCode;
+			break;
+			
+		case "oneDownKey":
+			System.out.println("한줄다운");
+			oneLineDownKeyTwo = keyCode;
+
+		default:
+			break;
+
+		}
+	}
+
+	private void play1Key(int keyCode) {
+		switch (key) {
+
+		case "upKey": // 스트링을 통해 key를 받아올 것
+			System.out.println("업키");
+			upKey = keyCode;
+			break;
+
+		case "lineDownKey":
+			System.out.println("라인다운");
+			lineDownKey = keyCode;
+			break;
+
+		case "downKey":
+			System.out.println("다운");
+			downKey = keyCode;
+			break;
+
+		case "leftKey":
+			System.out.println("왼쪽");
+			leftKey = keyCode;
+			break;
+
+		case "rightKey":
+			System.out.println("오른쪽");
+			rightKey = keyCode;
+			break;
+
+		case "pauseKey":
+			System.out.println("멈춤");
+			pauseKey = keyCode;
+			break;
+
+		case "oneDownKey":
+			System.out.println("한줄다운");
+			oneLineDownKey = keyCode;
+			System.out.println(keyCode);
+
+		default:
+			break;
+
+		}
 	}
 
 	@Override
