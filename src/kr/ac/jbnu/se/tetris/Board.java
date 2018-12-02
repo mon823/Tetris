@@ -131,22 +131,22 @@ public class Board extends JPanel implements ActionListener {
 		}
 	}
 
-	int squareWidth() {
+	private int squareWidth() {
 		return (int) getSize().getWidth() / BoardWidth;
 
 	}
 
-	int squareHeight() {
+	private int squareHeight() {
 		return (int) getSize().getHeight() / BoardHeight;
 	}
 
-	Tetrominoes shapeAt(int x, int y) {
+	private Tetrominoes shapeAt(int x, int y) {
 
 		return board[(y * BoardWidth) + x]; // board 가 순서대로 X 축으로 늘어나면서 세로축값이 2차로 증가
 
 	}
 
-	Tetrominoes shapeAtReverse(int x, int y) {
+	private Tetrominoes shapeAtReverse(int x, int y) {
 		return cpBoard[(y * BoardWidth) + x]; // board 가 순서대로 X 축으로 늘어나면서 세로축값이 2차로 증가
 
 	}
@@ -181,7 +181,7 @@ public class Board extends JPanel implements ActionListener {
 		timer.start();
 	}
 
-	public static <T> void reverse(Tetrominoes[] cpBoard) {
+	private static <T> void reverse(Tetrominoes[] cpBoard) {
 		Collections.reverse(Arrays.asList(cpBoard));
 	}
 
@@ -371,37 +371,41 @@ public class Board extends JPanel implements ActionListener {
 		guideDown();
 
 		if (!tryMove(curPiece, curX, curY)) { // 움직일 수 없으면
-			curPiece.setShape(Tetrominoes.NoShape); // 현제 도형을 NoShape로 바꾸
-			timer.stop(); // 시간을 멈추고
-			isStarted = false; // 실행 상태를 false로 바꾸고
-
-			if (is2Player == 0) {
-				String name = JOptionPane.showInputDialog(null, "이름을 입력하세요.", "기록", JOptionPane.PLAIN_MESSAGE);
-				if (name == null || name == "")
-					name = "user";
-
-				try {
-					record.reNewRecord(name, numLinesRemoved);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			if (is2Player == 0) {
-				statusbar.setText("game over"); // 게임 오버
-			} else if (is2Player == 1) {
-				statusbar1.setText("game over"); // 게임 오버
-				enemy.statusbar2.setText("game over");
-				takeGameOver();
-			} else if (is2Player == 2) {
-				statusbar2.setText("game over"); // 게임 오버
-				enemy.statusbar1.setText("game over");
-				takeGameOver();
-			}
+			gameOver();
 		}
 	}
 
-	public void takeGameOver() {
+	private void gameOver() {
+		curPiece.setShape(Tetrominoes.NoShape); // 현제 도형을 NoShape로 바꾸
+		timer.stop(); // 시간을 멈추고
+		isStarted = false; // 실행 상태를 false로 바꾸고
+
+		if (is2Player == 0) {
+			String name = JOptionPane.showInputDialog(null, "이름을 입력하세요.", "기록", JOptionPane.PLAIN_MESSAGE);
+			if (name == null || name == "")
+				name = "user";
+
+			try {
+				record.reNewRecord(name, numLinesRemoved);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		if (is2Player == 0) {
+			statusbar.setText("game over"); // 게임 오버
+		} else if (is2Player == 1) {
+			statusbar1.setText("game over"); // 게임 오버
+			enemy.statusbar2.setText("game over");
+			takeGameOver();
+		} else if (is2Player == 2) {
+			statusbar2.setText("game over"); // 게임 오버
+			enemy.statusbar1.setText("game over");
+			takeGameOver();
+		}
+	}
+
+	private void takeGameOver() {
 		enemy.timer.stop(); // 시간을 멈추고
 		enemy.isStarted = false; // 실행 상태를 false로 바꾸고
 
@@ -463,7 +467,7 @@ public class Board extends JPanel implements ActionListener {
 		}
 	}
 
-	public void createNewLines() {
+	private void createNewLines() {
 		for (int i = BoardHeight - 1; i > 0; --i) {
 			for (int j = 0; j < BoardWidth; ++j)
 				board[(i * BoardWidth) + j] = shapeAt(j, i - 1);
@@ -518,31 +522,7 @@ public class Board extends JPanel implements ActionListener {
 			sendScore();
 
 			if (is2Player != 0) {
-				if (is2Player == 1) {
-					stack += numFullLines;
-					if (stack >= 4) {
-						stack -= 4;
-						enemy.createNewLines();
-					}
-					String tmp = "";
-					for (int i = 0; i < stack; i++) {
-						tmp += "X";
-					}
-					tetris.statemenu.player1Stack.setText(tmp);
-				}
-				if (is2Player == 2) {
-					stack += numFullLines;
-					if (stack >= 4) {
-						stack -= 4;
-						enemy.createNewLines();
-					}
-					String tmp = "";
-					for (int i = 0; i < stack; i++) {
-						tmp += "X";
-					}
-					tetris.statemenu.player2Stack.setText(tmp);
-
-				}
+				attackOpponent(numFullLines);
 			}
 
 			if (numLinesRemoved / reverseLevel >= 1 && Configuration.isReverse == false) {// 뒤집기
@@ -570,20 +550,52 @@ public class Board extends JPanel implements ActionListener {
 			}
 
 			soundEffect.Play("sound/test_1.wav");
-			soundEffect.setSound((float) Configuration.effectSoundVolume); // 사운드 조절
-
-			if (is2Player == 0) {
-				statusbar.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
-			} else if (is2Player == 1) {
-				statusbar1.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
-			} else if (is2Player == 2) {
-				statusbar2.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
-			}
+			soundEffectSetting();
 			isFallingFinished = true; // 다 떨어진 상태 True (why?)
 			curPiece.setShape(Tetrominoes.NoShape); // 현 상태 NoShape ?
 			repaint();
 		}
 
+	}
+
+	private void soundEffectSetting() {
+		soundEffect.setSound((float) Configuration.effectSoundVolume); // 사운드 조절
+
+		if (is2Player == 0) {
+			statusbar.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
+		} else if (is2Player == 1) {
+			statusbar1.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
+		} else if (is2Player == 2) {
+			statusbar2.setText(String.valueOf(numLinesRemoved)); // 상태바에 text 다시 정리
+		}
+	}
+
+	private void attackOpponent(int numFullLines) {
+		if (is2Player == 1) {
+			stack += numFullLines;
+			if (stack >= 4) {
+				stack -= 4;
+				enemy.createNewLines();
+			}
+			String tmp = "";
+			for (int i = 0; i < stack; i++) {
+				tmp += "X";
+			}
+			tetris.statemenu.player1Stack.setText(tmp);
+		}
+		if (is2Player == 2) {
+			stack += numFullLines;
+			if (stack >= 4) {
+				stack -= 4;
+				enemy.createNewLines();
+			}
+			String tmp = "";
+			for (int i = 0; i < stack; i++) {
+				tmp += "X";
+			}
+			tetris.statemenu.player2Stack.setText(tmp);
+
+		}
 	}
 
 	private void drawSquare(Graphics g, int x, int y, Tetrominoes shape,boolean k) {

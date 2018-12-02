@@ -29,6 +29,7 @@ public class MainPage extends JPanel {
 	private JButton set;
 	private Main main;
 	private Configuration config;
+	private Tetris game;
 
 	public MainPage(Main main) {
 		this.main = main;
@@ -103,13 +104,13 @@ public class MainPage extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == play1) {
-				main.game = new Tetris();
-				main.game.setVisible(true);
+				game = new Tetris();
+				game.setVisible(true);
 				main.setVisible(false);
 			} else if (e.getSource() == play2) {
 				System.out.println("11");
-				main.game = new Tetris(1);
-				main.game.setVisible(true);
+				game = new Tetris(1);
+				game.setVisible(true);
 				main.setVisible(false);
 
 			} else if (e.getSource() == recode) {
